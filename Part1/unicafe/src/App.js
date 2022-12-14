@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-const Button = ({handleClick, text}) => <button onClick={handleClick}>{text}</button>
+const Button = (props) => <button onClick={props.handleClick}>{props.text}</button>
 
-const Statistics = ({goodRanks, neutralRanks, badRanks, total}) => {
-  if (total === 0) {
+const Statistics = (props) => {
+  if (props.total === 0) {
     return (
       <div>
         <p>No feedback given</p>
@@ -13,12 +13,12 @@ const Statistics = ({goodRanks, neutralRanks, badRanks, total}) => {
 
   return (
     <div>
-      <p>Good: {goodRanks}</p>
-      <p>Neutral: {neutralRanks}</p>
-      <p>Bad: {badRanks}</p>
-      <p>Total: {total}</p>
-      <p>Average: {((goodRanks * 1) + (neutralRanks * 0) + (badRanks * -1)) / total}</p>
-      <p>Positive: {(goodRanks / total) * 100}%</p>
+      <p>Good: {props.goodRanks}</p>
+      <p>Neutral: {props.neutralRanks}</p>
+      <p>Bad: {props.badRanks}</p>
+      <p>Total: {props.total}</p>
+      <p>Average: {((props.goodRanks * 1) + (props.neutralRanks * 0) + (props.badRanks * -1)) / props.total}</p>
+      <p>Positive: {(props.goodRanks / props.total) * 100}%</p>
     </div>
   )
 }
