@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const Button = ({handleClick, text}) => <button onClick={handleClick}>{text}</button>
 
-const Ratings = ({goodRanks, neutralRanks, badRanks, total}) => {
+const Statistics = ({goodRanks, neutralRanks, badRanks, total}) => {
   return (
     <div>
       <p>Good: {goodRanks}</p>
@@ -44,7 +44,7 @@ const App = () => {
       <Button handleClick={addNeutralRank} text="Neutral" />
       <Button handleClick={addBadRank} text="Bad" />
       <h1>Statistics</h1>
-      <Ratings goodRanks={good} neutralRanks={neutral} badRanks={bad} total={total} />
+      <Statistics goodRanks={good} neutralRanks={neutral} badRanks={bad} total={total} />
     </div>
   )
 }
