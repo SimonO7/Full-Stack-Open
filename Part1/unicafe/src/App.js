@@ -14,19 +14,34 @@ const Statistics = (props) => {
   }
 
   return (
-    <div>
-      <StatisticLine text="Good" value={props.goodRanks} />
-      <StatisticLine text="Neutral" value={props.neutralRanks} />
-      <StatisticLine text="Bad" value={props.badRanks} />
-      <StatisticLine text="Total" value={props.total} />
-      <StatisticLine text="Average" value={((props.goodRanks * 1) + (props.badRanks * -1)) / props.total} />
-      <StatisticLine text="Positive" value={(props.goodRanks / props.total) * 100} />
-    </div>
+    <table>
+      <tbody>
+        <StatisticLine text="Good" value={props.goodRanks} />
+        <StatisticLine text="Neutral" value={props.neutralRanks} />
+        <StatisticLine text="Bad" value={props.badRanks} />
+        <StatisticLine text="Total" value={props.total} />
+        <StatisticLine text="Average" value={((props.goodRanks * 1) + (props.badRanks * -1)) / props.total} />
+        <StatisticLine text="Positive" value={String((props.goodRanks / props.total) * 100)+" %"} />
+      </tbody>
+    </table>
   )
 }
 
 // Render a statistic line
-const StatisticLine = (props) => <p>{props.text}: {props.value}</p>
+const StatisticLine = (props) => {
+  return (
+    <tr>
+      <td>
+        {props.text}
+      </td>
+      <td>
+        {props.value}
+      </td>
+    </tr>
+  )
+  
+}
+
 
 // Main app
 const App = () => {
