@@ -3,6 +3,7 @@ import { useState } from 'react'
 // Render button
 const Button = (props) => <button onClick={props.handleClick}>{props.text}</button>
 
+
 // Render statistics
 const Statistics = (props) => {
   if (props.total === 0) {
@@ -27,6 +28,7 @@ const Statistics = (props) => {
   )
 }
 
+
 // Render a statistic line
 const StatisticLine = (props) => {
   return (
@@ -38,8 +40,7 @@ const StatisticLine = (props) => {
         {props.value}
       </td>
     </tr>
-  )
-  
+  ) 
 }
 
 
