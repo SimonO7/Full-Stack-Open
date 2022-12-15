@@ -10,8 +10,10 @@ const Anecdote = (props) => {
   )
 }
 
+
 // Render a button
 const Button = (props) => <button onClick={props.clickAction}>{props.text}</button>
+
 
 // Main app
 const App = () => {
