@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
-const MostVotes = (props) => {
-  const mostVotesIndex = props.votes.indexOf(Math.max(...props.votes))
+// Render an anecdote
+const Anecdote = (props) => {
   return (
     <>
-      <p>{props.anecdotes[mostVotesIndex]}</p>
-      <p>Has {props.votes[mostVotesIndex]} votes</p>
+      <p>{props.anecdote}</p>
+      <p>Has {props.votes} votes</p>
     </>
   )
 }
@@ -24,21 +24,24 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Uint8Array(7))
 
+  // Add a vote in the votes array for the anecdote in the same array index
   const addVote = (selectedID) => {
     const copyVotes = [...votes]
     copyVotes[selectedID] += 1
     setVotes(copyVotes)
   }
 
+  // Index of the anecdote with the most votes
+  const mostVotesIndex = votes.indexOf(Math.max(...votes))
+
   return (
     <div>
       <h1>Anecdote of the day</h1>
-      <p>{anecdotes[selected]}</p>
-      <p>Has {votes[selected]} votes</p>
+      <Anecdote anecdote={anecdotes[selected]} votes={votes[selected]} /> 
       <button onClick={() => addVote(selected)}>Vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * 7))}>Next anecdote</button>
       <h1>Anecdote with the most votes</h1>
-      <MostVotes anecdotes={anecdotes} votes={votes} />
+      <Anecdote anecdote={anecdotes[mostVotesIndex]} votes={votes[mostVotesIndex]} />
     </div>
   )
 }
