@@ -22,8 +22,9 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
-      <p>Votes: {votes[selected]}</p>
+      <p>Has {votes[selected]} votes</p>
       <button onClick={() => addVote(selected)}>Vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * 7))}>Next anecdote</button>
     </div>
