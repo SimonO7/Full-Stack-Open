@@ -13,16 +13,14 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Uint8Array(7))
-  const [mostVotesIndex, setMostVotesIndex] = useState(0)
 
   const addVote = (selectedID) => {
     const copyVotes = [...votes]
     copyVotes[selectedID] += 1
-    if (copyVotes[selectedID] > copyVotes[mostVotesIndex]) {
-      setMostVotesIndex(selectedID)
-    }
     setVotes(copyVotes)
   }
+
+  const mostVotesIndex = votes.indexOf(Math.max(...votes))
 
   return (
     <div>
