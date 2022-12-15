@@ -13,10 +13,14 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Uint8Array(7))
+  const [mostVotesIndex, setMostVotesIndex] = useState(0)
 
   const addVote = (selectedID) => {
     const copyVotes = [...votes]
     copyVotes[selectedID] += 1
+    if (copyVotes[selectedID] > copyVotes[mostVotesIndex]) {
+      setMostVotesIndex(selectedID)
+    }
     setVotes(copyVotes)
   }
 
@@ -27,6 +31,9 @@ const App = () => {
       <p>Has {votes[selected]} votes</p>
       <button onClick={() => addVote(selected)}>Vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * 7))}>Next anecdote</button>
+      <h1>Anecdote with the most votes</h1>
+      <p>{anecdotes[mostVotesIndex]}</p>
+      <p>Has {votes[mostVotesIndex]} votes</p>
     </div>
   )
 }
