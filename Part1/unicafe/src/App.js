@@ -52,16 +52,19 @@ const App = () => {
   const [bad, setBad] = useState(0)
   const [total, setTotal] = useState(0)
 
+  // Increment the good ranking and update total
   const addGoodRank = () => {
     setGood(good + 1)
     setTotal(total + 1)
   }
 
+  // Increment the neutral ranking and update total
   const addNeutralRank = () => {
     setNeutral(neutral + 1)
     setTotal(total + 1)
   }
 
+  // Increment the bad ranking and update total
   const addBadRank = () => {
     setBad(bad + 1)
     setTotal(total + 1)
