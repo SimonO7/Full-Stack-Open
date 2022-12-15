@@ -10,6 +10,10 @@ const Anecdote = (props) => {
   )
 }
 
+// Render a button
+const Button = (props) => <button onClick={props.clickAction}>{props.text}</button>
+
+// Main app
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -38,8 +42,8 @@ const App = () => {
     <div>
       <h1>Anecdote of the day</h1>
       <Anecdote anecdote={anecdotes[selected]} votes={votes[selected]} /> 
-      <button onClick={() => addVote(selected)}>Vote</button>
-      <button onClick={() => setSelected(Math.floor(Math.random() * 7))}>Next anecdote</button>
+      <Button clickAction={() => addVote(selected)} text="Vote" />
+      <Button clickAction={() => setSelected(Math.floor(Math.random() * 7))} text="Next anecdote" />
       <h1>Anecdote with the most votes</h1>
       <Anecdote anecdote={anecdotes[mostVotesIndex]} votes={votes[mostVotesIndex]} />
     </div>
