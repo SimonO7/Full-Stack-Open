@@ -8,19 +8,16 @@ const Course = ({ course }) => {
   )
 }
 
-const Header = ({ course }) => <h1>{course}</h1>
+const Header = ({ course }) => 
+  <h1>
+    {course}
+  </h1>
 
 const Total = ({ exercises }) => {
-  const getSum = (nums) => {
-    let total = 0
-    for (let i = 0; i < nums.length; i++) {
-      total += nums[i]
-    }
-    return total
-  }
-
   return (
-    <p>Total of {getSum(exercises)} exercises</p>
+    <p>
+      Total of {exercises.reduce((sum, currentValue) => sum + currentValue)} exercises
+    </p>
   )
 }
 
