@@ -3,13 +3,26 @@ const Course = ({ course }) => {
     <div>
       <Header course={course.name} />
       <Content parts={course.parts} />
+      <Total exercises={course.parts.map(part => part.exercises)} />
     </div>
   )
 }
 
 const Header = ({ course }) => <h1>{course}</h1>
 
-const Total = ({ sum }) => <p>Number of exercises {sum}</p>
+const Total = ({ exercises }) => {
+  const getSum = (nums) => {
+    let total = 0
+    for (let i = 0; i < nums.length; i++) {
+      total += nums[i]
+    }
+    return total
+  }
+
+  return (
+    <p>Total of {getSum(exercises)} exercises</p>
+  )
+}
 
 const Part = ({ part }) => 
   <p>
