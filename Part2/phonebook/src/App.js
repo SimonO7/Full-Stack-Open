@@ -2,22 +2,32 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { 
+      name: 'Arto Hellas',
+      number: '0123-2345-6789'
+    }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   // Handle new input into the name field
   const handleNameEntry = (event) => {
     setNewName(event.target.value)
   }
 
+  // Handle new input into number field
+  const handleNumberEntry = (event) => {
+    setNewNumber(event.target.value)
+  }
+
   // Handle adding entry into the phonebook
   const addEntry = (event) => {
     event.preventDefault()
 
-    // Make an object
+    // Make an new entry object
     const newEntry = {
-      name: newName
+      name: newName,
+      number: newNumber
     }
 
     // Check if object with same values already exists in the phonebook
@@ -30,6 +40,7 @@ const App = () => {
     // Add entry to the phonebook if it doesn't exist
     setPersons(persons.concat(newEntry))
     setNewName('')
+    setNewNumber('')
   }
 
   // Check to see if an object with the same value exists in the given array.
@@ -51,12 +62,15 @@ const App = () => {
           Name: <input value={newName} onChange={handleNameEntry} />
         </div>
         <div>
+          Number: <input value={newNumber} onChange={handleNumberEntry} />
+        </div>
+        <div>
           <button type="submit">Add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       <div>
-        {persons.map(person => <p key={person.name}>{person.name}</p>)}
+        {persons.map(person => <p key={person.name}>{person.name}: {person.number}</p>)}
       </div>
     </div>
   )
