@@ -6,19 +6,41 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
 
+  // Handle new input into the name field
   const handleNameEntry = (event) => {
     setNewName(event.target.value)
   }
 
+  // Handle adding entry into the phonebook
   const addEntry = (event) => {
     event.preventDefault()
 
-    const entry = {
+    // Make an object
+    const newEntry = {
       name: newName
     }
-    
-    setPersons(persons.concat(entry))
+
+    // Check if object with same values already exists in the phonebook
+    if (isDuplicateName(newEntry, persons)) {
+      return (
+        alert(`${newName} is already added to phonebook`)
+      )
+    }
+
+    // Add entry to the phonebook if it doesn't exist
+    setPersons(persons.concat(newEntry))
     setNewName('')
+  }
+
+  // Check to see if an object with the same value exists in the given array.
+  // Returns true if object with same value already exists in the array, false otherwise.
+  const isDuplicateName = (newObject, array) => {
+    for (let i = 0; i < array.length; i++) {
+      if (JSON.stringify(array[i]) === JSON.stringify(newObject)) {
+        return true
+      }
+    }
+    return false
   }
 
   return (
