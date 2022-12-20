@@ -5,10 +5,15 @@ const App = () => {
     { 
       name: 'Arto Hellas',
       number: '0123-2345-6789'
+    },
+    {
+      name: 'Pomu Rainpuff',
+      number: '1800-POMU'
     }
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
   // Handle new input into the name field
   const handleNameEntry = (event) => {
@@ -18,6 +23,11 @@ const App = () => {
   // Handle new input into number field
   const handleNumberEntry = (event) => {
     setNewNumber(event.target.value)
+  }
+
+  // Handle new input into the search field
+  const handleSearchEntry = (event) => {
+    setSearchQuery(event.target.value)
   }
 
   // Handle adding entry into the phonebook
@@ -54,9 +64,16 @@ const App = () => {
     return false
   }
 
+  // Filter out entries based on the search query
+  const entriesToShow = persons.filter(person => person.name.toLowerCase().includes(searchQuery.toLowerCase()))
+
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
+      <div>
+        Filter shown with <input value={searchQuery} onChange={handleSearchEntry} />
+      </div>
+      <h2>Add new entry</h2>
       <form onSubmit={addEntry}>
         <div>
           Name: <input value={newName} onChange={handleNameEntry} />
@@ -70,7 +87,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <div>
-        {persons.map(person => <p key={person.name}>{person.name}: {person.number}</p>)}
+        {entriesToShow.map(person => <p key={person.name}>{person.name}: {person.number}</p>)}
       </div>
     </div>
   )
