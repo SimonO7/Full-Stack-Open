@@ -1,5 +1,40 @@
 import { useState } from 'react'
 
+const Filter = ({ searchQuery, handleSearchEntry }) => {
+  return (
+    <div>
+      Filter shown with <input value={searchQuery} onChange={handleSearchEntry} />
+    </div>
+  )
+}
+  
+const AddPersonForm = (props) => {
+  return (
+    <form onSubmit={props.formSubmitAction}>
+      <div>
+        Name: <input value={props.newName} onChange={props.handleNameEntry} />
+      </div>
+      <div>
+        Number: <input value={props.newNumber} onChange={props.handleNumberEntry} />
+      </div>
+      <div>
+        <button type="submit">Add</button>
+      </div>
+    </form>
+  )
+}
+
+const Entries = ({ persons, searchQuery }) => {
+  // Filter out entries based on the search query
+  const entriesToShow = persons.filter(person => person.name.toLowerCase().includes(searchQuery.toLowerCase()))
+
+  return (
+    <div>
+      {entriesToShow.map(person => <p key={person.name}>{person.name}: {person.number}</p>)}
+    </div>
+  )
+}
+
 const App = () => {
   const [persons, setPersons] = useState([
     { 
@@ -64,31 +99,14 @@ const App = () => {
     return false
   }
 
-  // Filter out entries based on the search query
-  const entriesToShow = persons.filter(person => person.name.toLowerCase().includes(searchQuery.toLowerCase()))
-
   return (
     <div>
       <h1>Phonebook</h1>
-      <div>
-        Filter shown with <input value={searchQuery} onChange={handleSearchEntry} />
-      </div>
+      <Filter searchQuery={searchQuery} handleSearchEntry={handleSearchEntry}/>
       <h2>Add new entry</h2>
-      <form onSubmit={addEntry}>
-        <div>
-          Name: <input value={newName} onChange={handleNameEntry} />
-        </div>
-        <div>
-          Number: <input value={newNumber} onChange={handleNumberEntry} />
-        </div>
-        <div>
-          <button type="submit">Add</button>
-        </div>
-      </form>
+      <AddPersonForm formSubmitAction={addEntry} newName={newName} newNumber={newNumber} handleNameEntry={handleNameEntry} handleNumberEntry={handleNumberEntry} />
       <h2>Numbers</h2>
-      <div>
-        {entriesToShow.map(person => <p key={person.name}>{person.name}: {person.number}</p>)}
-      </div>
+      <Entries persons={persons} searchQuery={searchQuery} />
     </div>
   )
 }
