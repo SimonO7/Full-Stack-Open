@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Filter = ({ searchQuery, handleSearchEntry }) => {
   return (
@@ -36,19 +37,15 @@ const Entries = ({ persons, searchQuery }) => {
 }
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { 
-      name: 'Arto Hellas',
-      number: '0123-2345-6789'
-    },
-    {
-      name: 'Pomu Rainpuff',
-      number: '1800-POMU'
-    }
-  ]) 
+  const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+
+  // Get the persons data from JSON
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then(response => {setPersons(response.data)})
+  }, [])
 
   // Handle new input into the name field
   const handleNameEntry = (event) => {
