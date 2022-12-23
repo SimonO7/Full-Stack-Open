@@ -1,40 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-
-const Filter = ({ searchQuery, handleSearchEntry }) => {
-  return (
-    <div>
-      Filter shown with <input value={searchQuery} onChange={handleSearchEntry} />
-    </div>
-  )
-}
-  
-const AddPersonForm = (props) => {
-  return (
-    <form onSubmit={props.formSubmitAction}>
-      <div>
-        Name: <input value={props.newName} onChange={props.handleNameEntry} />
-      </div>
-      <div>
-        Number: <input value={props.newNumber} onChange={props.handleNumberEntry} />
-      </div>
-      <div>
-        <button type="submit">Add</button>
-      </div>
-    </form>
-  )
-}
-
-const Entries = ({ persons, searchQuery }) => {
-  // Filter out entries based on the search query
-  const entriesToShow = persons.filter(person => person.name.toLowerCase().includes(searchQuery.toLowerCase()))
-
-  return (
-    <div>
-      {entriesToShow.map(person => <p key={person.name}>{person.name}: {person.number}</p>)}
-    </div>
-  )
-}
+import Filter from './components/Filter'
+import AddPersonForm from './components/AddPersonForm'
+import Entries from './components/Entries'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
